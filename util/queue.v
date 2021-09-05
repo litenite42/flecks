@@ -70,6 +70,14 @@ pub fn (q Queue<T>) enqueue(value T) &Queue<T> {
 	return new_q
 }
 
+pub fn (mut q Queue<T>) enqueue_m(value T) {
+	assert !q.is_full() 
+	q.new_rear_ndx()
+	q.inc_size()
+
+	q.set(value)
+}
+
 // dequeue remove item from front of queue
 // @return ?T either item at front of queue or none
 pub fn (mut q Queue<T>) dequeue() ?T {

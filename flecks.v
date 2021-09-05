@@ -2,30 +2,13 @@ module main
 
 import ecs
 import util as u
+import ecs.managers as mgrs
 
 fn main() {
-	len := 10000
-	mut q := u.new_queue<int>(len)
-	assert q.is_empty()
+	println('hello')
 
-	for i in 0 .. len - 1 {
-		q = q.enqueue(i + 1)
-	}
+	emgr := mgrs.new_entity_manager()
 
-	assert !q.is_full() && !q.is_empty()
+	println(emgr)
 
-	q = q.enqueue(4)
-
-	assert q.is_full()
-
-	x := q.front() or { panic(err) }
-	assert x == 1
-
-	front := q.dequeue() or { panic(err) }
-	assert front == 1
-
-	for !q.is_empty() {
-		q.dequeue() or { -1 }
-	}
-	assert q.is_empty()
 }
