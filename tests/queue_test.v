@@ -1,8 +1,8 @@
 module main
-import ecs
+
 import util as u
 
-fn main() {
+fn test_main() {
 	len := 10000
 	mut q := u.new_queue<int>(len)
 	assert q.is_empty()
