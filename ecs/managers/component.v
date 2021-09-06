@@ -8,6 +8,10 @@ pub struct ComponentManager{
 	next_component_type ecs.ComponentType
 }
 
+pub fn new_component_manager() &ComponentManager {
+	return &ComponentManager{}
+}
+
 pub fn (mut c ComponentManager) register_component<T>() {
 	assert T.name !in c.component_types
 
