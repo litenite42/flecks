@@ -4,9 +4,9 @@ import bitfield as bf
 
 pub struct Coordinator {
 	mut:
-	e_mgr &EntityManager
-	c_mgr &ComponentManager
-	s_mgr &SystemManager
+	e_mgr &EntityManager = &EntityManager{}
+	c_mgr &ComponentManager = &ComponentManager{}
+	s_mgr &SystemManager = &SystemManager{}
 }
 
 pub fn (mut c Coordinator) create_entity() ?Entity {
