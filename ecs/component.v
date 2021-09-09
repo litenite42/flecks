@@ -1,11 +1,10 @@
-module managers
-
-import ecs
+module ecs
 
 pub struct ComponentManager{
-	component_types map[string]ecs.ComponentType
+	mut:
+	component_types map[string]ComponentType
 	component_arrays map[string]IComponentContainer
-	next_component_type ecs.ComponentType
+	next_component_type ComponentType
 }
 
 pub fn new_component_manager() &ComponentManager {
@@ -20,27 +19,27 @@ pub fn (mut c ComponentManager) register_component<T>() {
 	c.next_component_type++
 }
 
-pub fn (c ComponentManager) get_component_type<T>() ecs.ComponentType {
+pub fn (c ComponentManager) get_component_type<T>() ComponentType {
 	assert T.name !in c.component_types
 
 	return c.component_types[T.name]
 }
 
-pub fn (mut c ComponentManager) add_component<T>(entity ecs.Entity, component T) {
+pub fn (mut c ComponentManager) add_component<T>(entity Entity, component T) {
 	c.get_component_array<T>().insert(entity, component)
 }
 
-pub fn (mut c ComponentManager) remove_component<T>(entity ecs.Entity) {
+pub fn (mut c ComponentManager) remove_component<T>(entity Entity) {
 	c.get_component_array<T>().remove(entity)
 }
 
-pub fn (c ComponentManager) get_component<T>(entity ecs.Entity) ?T {
+pub fn (c ComponentManager) get_component<T>(entity Entity) ?T {
 	component := c.get_component_array<T>.get(entity) ?
 	return component
 }
 
-pub fn (mut c ComponentManager) entity_destroyed<T>(entity ecs.Entity) {
-	for type_name, mut component in c.component_arrays {
+pub fn (mut c ComponentManager) entity_destroyed(entity Entity) {
+	for _, mut component in c.component_arrays {
 		component.entity_destroyed(entity)
 	} 
 }

@@ -6,6 +6,10 @@ pub struct System {
 	entities u.Set<Entity>
 }
 
+pub fn (mut s System) add(entity Entity) {
+	s.entities.add(entity)
+}
+
 pub fn (mut s System) remove(entity Entity) bool {
 	return s.entities.remove(entity)
 }

@@ -2,19 +2,19 @@ module main
 
 import ecs
 import util as u
-import ecs.managers as mgrs
+//import ecs.managers as mgrs
 
 fn main() {
 	println('hello')
 
-	emgr := mgrs.new_entity_manager()
+	emgr := ecs.new_entity_manager()
 
 	println(emgr)
 
-	cmgr := mgrs.new_component_manager()
+	cmgr := ecs.new_component_manager()
 	println(cmgr)
 
-	smgr := mgrs.new_system_manager()
+	smgr := ecs.new_system_manager()
 	println(smgr)
 
 	// mut set := u.Set<int>{}

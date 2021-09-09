@@ -1,20 +1,19 @@
-module managers
-import ecs
+module ecs
 
 pub interface IComponentContainer {
-	entity_destroyed(entity ecs.Entity)
+	entity_destroyed(entity Entity)
 	destroy_entity()
 }
 
 pub struct ComponentArray<T> {
 	mut:
-	field []T = []T{len:int(ecs.max_entities), cap:int(ecs.max_entities)}
-	entity_index map[ecs.Entity]i16
-	index_entity map[i16]ecs.Entity
+	field []T = []T{len:int(max_entities), cap:int(max_entities)}
+	entity_index map[Entity]i16
+	index_entity map[i16]Entity
 	size i16
 }
 
-pub fn (mut c ComponentArray<T>) insert(entity ecs.Entity, component T) {
+pub fn (mut c ComponentArray<T>) insert(entity Entity, component T) {
 	assert entity !in c.entity_index
 
 	new_ndx := c.size
@@ -25,7 +24,7 @@ pub fn (mut c ComponentArray<T>) insert(entity ecs.Entity, component T) {
 	c.size++
 }
 
-pub fn (mut c ComponentArray<T>) remove(entity ecs.Entity) {
+pub fn (mut c ComponentArray<T>) remove(entity Entity) {
 	assert entity in c.entity_index
 
 	ndx := c.entity_index[entity]
@@ -43,7 +42,7 @@ pub fn (mut c ComponentArray<T>) remove(entity ecs.Entity) {
 	c.size--
 }
 
-pub fn (c ComponentArray<T>) get(entity ecs.Entity) ?T {
+pub fn (c ComponentArray<T>) get(entity Entity) ?T {
 	if entity !in c.entity_index {
 		return none
 	}
@@ -51,7 +50,7 @@ pub fn (c ComponentArray<T>) get(entity ecs.Entity) ?T {
 	return c.field[c.entity_index[entity]]
 }
 
-pub fn (c ComponentArray<T>) entity_destroyed(entity ecs.Entity) {
+pub fn (c ComponentArray<T>) entity_destroyed(entity Entity) {
 	if entity in c.entity_index {
 		c.remove(entity)
 	}
