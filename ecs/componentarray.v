@@ -2,7 +2,7 @@ module ecs
 
 pub interface IComponentContainer {
 	entity_destroyed(entity Entity)
-	destroy_entity()
+//	destroy_entity()
 }
 
 pub struct ComponentArray<T> {
@@ -50,8 +50,14 @@ pub fn (c ComponentArray<T>) get(entity Entity) ?T {
 	return c.field[c.entity_index[entity]]
 }
 
-pub fn (c ComponentArray<T>) entity_destroyed(entity Entity) {
+pub fn (mut c ComponentArray<T>) entity_destroyed(entity Entity) {
 	if entity in c.entity_index {
 		c.remove(entity)
 	}
 }
+
+// pub fn (mut c ComponentArray<T>) destroy_entity(entity Entity) {
+// 	if entity in c.entity_index {
+// 		c.remove(entity)
+// 	}
+// } 

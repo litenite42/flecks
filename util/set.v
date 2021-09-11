@@ -5,6 +5,10 @@ pub struct Set<T> {
 	field []T
 }
 
+pub fn (s Set<T>) field() []T {
+	return s.field
+}
+
 pub fn (mut s Set<T>) add<T>(value T) bool {
 	mut result := false
 	
@@ -25,4 +29,25 @@ pub fn (mut s Set<T>) remove<T>(value T) bool {
 	}
 
 	return result
+}
+
+pub fn (s Set<T>) iter() SetIterator<T> {
+	return SetIterator<T> {set : s.field()}
+}
+
+pub struct SetIterator<T> {
+	set []T
+
+	mut:
+	ndx int
+}
+
+pub fn (mut s SetIterator<T>) next<T>() ?T {
+	if s.ndx >= s.set.len {
+		return error('')
+	}
+	defer {
+		s.ndx++
+	}
+	return s.set[s.ndx]
 }

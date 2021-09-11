@@ -34,6 +34,10 @@ pub fn (q Queue<T>) is_empty() bool {
 	return q.size == 0
 }
 
+pub fn (q Queue<T>) length() int {
+	return q.size
+}
+
 // clone duplicates a queue's information into a new reference
 pub fn (q Queue<T>) clone() &Queue<T> {
 	return &Queue<T>{

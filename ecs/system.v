@@ -13,3 +13,7 @@ pub fn (mut s System) add(entity Entity) {
 pub fn (mut s System) remove(entity Entity) bool {
 	return s.entities.remove(entity)
 }
+
+pub fn (mut s System) iter() u.SetIterator<Entity> {
+	return s.entities.iter<Entity>()
+} 

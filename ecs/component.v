@@ -38,9 +38,9 @@ pub fn (c ComponentManager) get_component<T>(entity Entity) ?T {
 	return component
 }
 
-pub fn (mut c ComponentManager) entity_destroyed(entity Entity) {
+pub fn (mut c ComponentManager) entity_destroyed<T>(entity Entity) {
 	for _, mut component in c.component_arrays {
-		component.entity_destroyed(entity)
+		component.entity_destroyed<T>(entity)
 	} 
 }
 

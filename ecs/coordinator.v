@@ -1,9 +1,10 @@
 module ecs
 //import managers as mgrs
 import bitfield as bf
+import util as u
 
 pub struct Coordinator {
-	mut:
+	pub mut:
 	e_mgr &EntityManager = &EntityManager{}
 	c_mgr &ComponentManager = &ComponentManager{}
 	s_mgr &SystemManager = &SystemManager{}
